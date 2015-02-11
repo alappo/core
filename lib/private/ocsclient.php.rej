@@ -1,0 +1,44 @@
+--- lib/private/ocsclient.php
++++ lib/private/ocsclient.php
+@@ -33,14 +33,25 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>
+  *
+  */
+-class OC_OCSClient{
++
++namespace OC;
++
++/**
++ * This class provides an easy way for apps to store config values in the
++ * database.
++ */
++
++class OCSClient {
+ 
+ 	/**
+ 	 * Returns whether the AppStore is enabled (i.e. because the AppStore is disabled for EE)
++	 *
+ 	 * @return bool
+ 	 */
+-	protected static function isAppstoreEnabled() {
+-		if(OC::$server->getConfig()->getSystemValue('appstoreenabled', true) === false OR OC_Util::getEditionString() !== '') {
++	public static function isAppStoreEnabled() {
++		if (\OC::$server->getConfig()->getSystemValue('appstoreenabled', true) === false ||
++			\OC_Util::getEditionString() !== ''
++		) {
+ 			return false;
+ 		}
+ 
+--- lib/private/ocsclient.php
++++ lib/private/ocsclient.php
+@@ -49,9 +49,7 @@ class OCSClient {
+ 	 * @return bool
+ 	 */
+ 	public static function isAppStoreEnabled() {
+-		if (\OC::$server->getConfig()->getSystemValue('appstoreenabled', true) === false ||
+-			\OC_Util::getEditionString() !== ''
+-		) {
++		if (\OC::$server->getConfig()->getSystemValue('appstoreenabled', true) === false ) {
+ 			return false;
+ 		}
+ 
